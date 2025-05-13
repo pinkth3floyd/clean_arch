@@ -1,5 +1,5 @@
-
-import React, { useEffect } from 'react';
+"use client"
+import React, { useEffect, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../../ui/elements/card';
 import { useTodoViewModel } from '../hooks/usetodoviewmodel';
 import TodoItem from './TodoItem';
@@ -8,7 +8,9 @@ import { useTodoStore } from '../store/todostore'
 
 const TodoList: React.FC = () => {
   const { loading, error } = useTodoStore();
-  const { todos } = useTodoStore(state => ({ todos: state.todos }));
+  // const { todos } = useTodoStore(state => ({ todos: state.todos }));
+  // const { todos } = useTodoStore(state => useMemo(() => ({ todos: state.todos }), [state.todos]));
+   const todos = useTodoStore(state => state.todos);
   const { fetchTodos } = useTodoViewModel();
   
   useEffect(() => {

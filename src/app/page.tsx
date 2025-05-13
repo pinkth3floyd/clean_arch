@@ -1,10 +1,11 @@
-'use server';
+"use client"
 
-import Home from './TodoListClient';
 import { configureDependencies } from './core/config/di';
 import { GET_TODOS_USECASE } from './core/features/todo/domain/usecases/gettodo';
 import { Todo } from './core/features/todo/domain/entities/todo';
 import TodoList from './core/features/todo/presentation/components/TodoList';
+import { ContainerProvider } from "../app/core/main/di/container";
+
 
 interface HomePageProps {
   initialTodos: Todo[];
@@ -12,8 +13,7 @@ interface HomePageProps {
 
 export default async function HomePage() {
   const container = configureDependencies();
-  const getTodosUseCase = container[GET_TODOS_USECASE];
-  const initialTodos: Todo[] = await getTodosUseCase.execute();
+
 
   return (
 
@@ -26,7 +26,9 @@ export default async function HomePage() {
       </header>
       
       <main className="max-w-md mx-auto">
+        <ContainerProvider container={container}>
         <TodoList />
+        </ContainerProvider>
       </main>
     </div>
   )

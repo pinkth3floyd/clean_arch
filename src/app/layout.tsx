@@ -32,7 +32,7 @@ export default function RootLayout({
       <TansTackProvider>
         <TooltipProvider>
           <Toaster/>
-          <Sonner/>
+          {/* <Sonner/> */}
 
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}

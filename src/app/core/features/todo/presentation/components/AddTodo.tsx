@@ -1,4 +1,4 @@
-
+"use client"
 import React, { useState } from 'react';
 import { useTodoViewModel } from '../hooks/usetodoviewmodel';
 import { Button } from '../../../../ui/elements/button';
