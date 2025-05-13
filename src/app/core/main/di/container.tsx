@@ -20,7 +20,6 @@ export const ContainerProvider: React.FC<{
 
 
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export const useContainer = <T extends unknown>(key: string): T => {
   const container = useContext(ContainerContext);
   

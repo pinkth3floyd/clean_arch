@@ -57,7 +57,7 @@ const AddTodoForm: React.FC = () => {
         <Input
           placeholder="Todo title"
           value={title}
-          onChange={(e:any) => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           disabled={isSubmitting}
         />
       </div>
@@ -66,7 +66,7 @@ const AddTodoForm: React.FC = () => {
         <Textarea
           placeholder="Description (optional)"
           value={description}
-          onChange={(e:any) => setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           rows={2}
           disabled={isSubmitting}
         />

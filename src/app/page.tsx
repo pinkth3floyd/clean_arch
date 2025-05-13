@@ -1,17 +1,13 @@
 "use client"
 
 import { configureDependencies } from './core/config/di';
-import { GET_TODOS_USECASE } from './core/features/todo/domain/usecases/gettodo';
-import { Todo } from './core/features/todo/domain/entities/todo';
+// import { Todo } from './core/features/todo/domain/entities/todo';
 import TodoList from './core/features/todo/presentation/components/TodoList';
 import { ContainerProvider } from "../app/core/main/di/container";
 
 
-interface HomePageProps {
-  initialTodos: Todo[];
-}
 
-export default async function HomePage() {
+export default function HomePage() {
   const container = configureDependencies();
 
 

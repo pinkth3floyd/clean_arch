@@ -36,7 +36,7 @@ export class TodoRepositoryImpl implements TodoRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    const initialLength = todos.length;
+    // const initialLength = todos.length;
     const index = todos.findIndex(todo => todo.id === id);
     if (index !== -1) {
       todos.splice(index, 1);

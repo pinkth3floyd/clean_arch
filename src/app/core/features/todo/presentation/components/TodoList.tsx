@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../../ui/elements/card';
 import { useTodoViewModel } from '../hooks/usetodoviewmodel';
 import TodoItem from './TodoItem';
@@ -15,7 +15,7 @@ const TodoList: React.FC = () => {
   
   useEffect(() => {
     fetchTodos();
-  }, []);
+  });
   
   if (loading && !todos.length) {
     return (

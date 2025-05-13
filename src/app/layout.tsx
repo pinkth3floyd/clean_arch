@@ -4,7 +4,7 @@ import "./globals.css";
 import TansTackProvider from "./core/providers/tanstackprovider";
 import { TooltipProvider } from "./core/ui/elements/tooltip";
 import { Toaster } from "../app/core/ui/elements/toaster";
-import { Toaster as Sonner } from "../app/core/ui/elements/sonner";
+// import { Toaster as Sonner } from "../app/core/ui/elements/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
