@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react';
 import { useContainer } from '../../../../main/di/container';
-import { CreateTodoDTO, Todo, UpdateTodoDTO } from '../../domain/entities/todo';
+import { CreateTodoDTO, UpdateTodoDTO } from '../../domain/entities/todo';
 import { CreateTodoUseCase, CREATE_TODO_USECASE } from '../../domain/usecases/createtodo';
 import { GetTodosUseCase, GET_TODOS_USECASE } from '../../domain/usecases/gettodo';
 import { TodoRepository, TODO_REPOSITORY } from '../../domain/reposotories/todoRepository';
@@ -30,7 +30,7 @@ export const useTodoViewModel = () => {
     if (todos.length === 0) {
       fetchTodos();
     }
-  }, []);
+  });
   
   const fetchTodos = async () => {
     try {

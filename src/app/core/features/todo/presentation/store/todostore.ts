@@ -1,7 +1,7 @@
 
 import { create } from 'zustand';
-import { Todo, CreateTodoDTO, UpdateTodoDTO } from '../../domain/entities/todo';
-import { TodoRepository } from '../../domain/reposotories/todoRepository';
+import { Todo,  } from '../../domain/entities/todo';
+
 
 interface TodoState {
   todos: Todo[];
