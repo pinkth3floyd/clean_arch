@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import TansTackProvider from "./core/providers/tanstackprovider";
+import { ContainerProvider } from "./core/main/di/container";
+import { configureDependencies } from "./core/config/di";
+
 
 
 const geistSans = Geist({
@@ -19,23 +22,34 @@ export const metadata: Metadata = {
   description: "Written By Prakash Niraula",
 };
 
+
+const container = configureDependencies();
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
 
- 
+
+
   return (
     <html lang="en">
       <TansTackProvider>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+
+        {/* <ContainerProvider container={container}> */}
+
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            {children}
+          </body>
+
+        {/* </ContainerProvider> */}
       </TansTackProvider>
-     
+
+
     </html>
   );
 }
