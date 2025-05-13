@@ -38,7 +38,7 @@ export default function RootLayout({
     <html lang="en">
       <TansTackProvider>
 
-        {/* <ContainerProvider container={container}> */}
+        <ContainerProvider container={container}>
 
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -46,7 +46,7 @@ export default function RootLayout({
             {children}
           </body>
 
-        {/* </ContainerProvider> */}
+        </ContainerProvider>
       </TansTackProvider>
 
 

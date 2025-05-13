@@ -7,7 +7,6 @@ export type Container = Record<string, any>;
 
 const ContainerContext = createContext<Container>({});
 
-
 export const ContainerProvider: React.FC<{
   container: Container;
   children: React.ReactNode;
@@ -15,11 +14,13 @@ export const ContainerProvider: React.FC<{
   return (
     <ContainerContext.Provider value={container}>
       {children}
-    </ContainerContext.Provider> 
+    </ContainerContext.Provider>
   );
 };
 
 
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const useContainer = <T extends unknown>(key: string): T => {
   const container = useContext(ContainerContext);
   
@@ -31,18 +32,22 @@ export const useContainer = <T extends unknown>(key: string): T => {
 };
 
 
+
+
+
+
 export const useDependencies = <T extends Record<string, string>>(
   deps: T
-): { [K in keyof T]: any } => {
+): { [K in keyof T]: unknown } => {
   const container = useContext(ContainerContext);
-  const result: Record<string, any> = {};
-  
+  const result: Record<string, unknown> = {};
+
   for (const [key, value] of Object.entries(deps)) {
     if (!container[value]) {
       throw new Error(`Dependency ${value} not found in container`);
     }
     result[key] = container[value];
   }
-  
-  return result as { [K in keyof T]: any };
+
+  return result as { [K in keyof T]: unknown };
 };
