@@ -1,12 +1,18 @@
+'use server';
 
+import Home from './TodoListClient'; 
+import { configureDependencies } from './core/config/di';
+import { GET_TODOS_USECASE } from './core/features/todo/domain/usecases/gettodo';
+import { Todo } from './core/features/todo/domain/entities/todo'; 
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-       
-      </main>
-     
-    </div>
-  );
+interface HomePageProps {
+  initialTodos: Todo[]; 
+}
+
+export default async function HomePage() {
+  const container = configureDependencies();
+  const getTodosUseCase = container[GET_TODOS_USECASE];
+  const initialTodos: Todo[] = await getTodosUseCase.execute();
+
+  return <Home initialTodos={initialTodos} />;
 }

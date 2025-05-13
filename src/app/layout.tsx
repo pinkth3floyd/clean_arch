@@ -5,8 +5,6 @@ import TansTackProvider from "./core/providers/tanstackprovider";
 import { ContainerProvider } from "./core/main/di/container";
 import { configureDependencies } from "./core/config/di";
 
-
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,34 +20,24 @@ export const metadata: Metadata = {
   description: "Written By Prakash Niraula",
 };
 
-
-const container = configureDependencies();
-
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
+  const container = configureDependencies();
 
   return (
     <html lang="en">
       <TansTackProvider>
-
         <ContainerProvider container={container}>
-
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
             {children}
           </body>
-
         </ContainerProvider>
       </TansTackProvider>
-
-
     </html>
   );
 }
