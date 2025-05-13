@@ -1,77 +1,60 @@
-
 import { Todo } from '../../domain/entities/todo';
 import { TodoRepository } from '../../domain/reposotories/todoRepository';
-// import { AsyncLocalStorage } from 'async_hooks';
 
+
+const todos: Todo[] = [];
 
 export class TodoRepositoryImpl implements TodoRepository {
-  private storageKey = 'todos';
-
-  private getStoredTodos(): Todo[] {
-    // const storedTodos = localStorage.getItem(this.storageKey);
-     const storedTodos = localStorage.getItem(this.storageKey);
-    return storedTodos ? JSON.parse(storedTodos) : [];
-  }
-
-  private saveTodos(todos: Todo[]): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(todos));
-  }
-
   async findById(id: string): Promise<Todo | null> {
-    const todos = this.getStoredTodos();
-    const todo = todos.find(todo => todo.id === id);
-    return todo || null;
+    return todos.find(todo => todo.id === id) || null;
   }
 
   async findAll(): Promise<Todo[]> {
-    return this.getStoredTodos();
+    return [...todos]; 
   }
 
   async save(todo: Todo): Promise<Todo> {
-    const todos = this.getStoredTodos();
     todos.push(todo);
-    this.saveTodos(todos);
     return todo;
   }
 
   async update(id: string, todoUpdate: Partial<Todo>): Promise<Todo> {
-    const todos = this.getStoredTodos();
     const index = todos.findIndex(todo => todo.id === id);
-    
+
     if (index === -1) {
       throw new Error(`Todo with id ${id} not found`);
     }
-    
+
     const updatedTodo = {
       ...todos[index],
       ...todoUpdate,
       updatedAt: new Date()
     };
-    
+
     todos[index] = updatedTodo;
-    this.saveTodos(todos);
-    
-    return updatedTodo;
+    return { ...updatedTodo }; 
   }
 
   async delete(id: string): Promise<boolean> {
-    const todos = this.getStoredTodos();
-    const filteredTodos = todos.filter(todo => todo.id !== id);
-    
-    if (filteredTodos.length === todos.length) {
-      return false;
+    const initialLength = todos.length;
+    const index = todos.findIndex(todo => todo.id === id);
+    if (index !== -1) {
+      todos.splice(index, 1);
+      return true;
     }
-    
-    this.saveTodos(filteredTodos);
-    return true;
+    return false;
   }
 
   async findByCompletionStatus(completed: boolean): Promise<Todo[]> {
-    const todos = this.getStoredTodos();
     return todos.filter(todo => todo.completed === completed);
   }
 
   async markAsCompleted(id: string): Promise<Todo> {
-    return this.update(id, { completed: true });
+    const index = todos.findIndex(todo => todo.id === id);
+    if (index !== -1) {
+      todos[index] = { ...todos[index], completed: true, updatedAt: new Date() };
+      return { ...todos[index] };
+    }
+    throw new Error(`Todo with id ${id} not found`);
   }
 }
